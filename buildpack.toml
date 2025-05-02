@@ -2,7 +2,7 @@ api = "0.8"
 
 [buildpack]
 id = "io.build.github.mrch4n.cnb-pdftk"
-version = "0.0.1"
+version = "0.0.2"
 name = "PDFTK CNB Buildpack"
 description = "A Cloud Native Buildpack for PDFTK"
 
