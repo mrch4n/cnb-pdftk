@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+# Always detect as we want to make PDFTK available
+exit 0 

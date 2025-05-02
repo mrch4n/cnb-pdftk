@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+cat << EOL
+---
+addons: []
+config_vars: {}
+default_process_types:
+  web: pdftk --version
+EOL 

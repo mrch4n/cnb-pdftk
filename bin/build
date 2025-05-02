@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+# Get the platform directory
+PLATFORM_DIR=${1:?}
+# Get the layers directory
+LAYERS_DIR=${2:?}
+# Get the app directory
+APP_DIR=${3:?}
+
+# Debug: Print the CNB_STACK_ID value
+echo "-----------------------------"
+echo "CNB_STACK_ID is: ${CNB_STACK_ID}"
+echo "-----------------------------"
+
+# Create the pdftk layer
+mkdir -p "${LAYERS_DIR}/pdftk"
+
+# Copy the binaries to the layer
+cp -r "${CNB_BUILDPACK_DIR}/buildpacks/pdftk/binaries-${CNB_STACK_ID}/"* "${LAYERS_DIR}/pdftk/bin/"
+
+# Set up the environment
+cat > "${LAYERS_DIR}/pdftk.toml" << EOL
+launch = true
+build = false
+cache = false
+EOL
+
+# Set up the environment variables
+cat > "${LAYERS_DIR}/pdftk/env/EXPORT" << EOL
+export PATH="\$PATH:${LAYERS_DIR}/pdftk/bin"
+export LD_LIBRARY_PATH="\$LD_LIBRARY_PATH:${LAYERS_DIR}/pdftk/bin"
+EOL
+
+# Make the binaries executable
+chmod +x "${LAYERS_DIR}/pdftk/bin/"* 

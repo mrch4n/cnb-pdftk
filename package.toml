@@ -1,0 +1,7 @@
+[buildpack]
+uri = "."
+
+[[order]]
+[[order.group]]
+id = "io.build.github.mrch4n.cnb-pdftk"
+version = "0.0.1" 

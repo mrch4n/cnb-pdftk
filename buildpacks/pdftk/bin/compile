@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+# Get the build directory
+BUILD_DIR=${1:?}
+# Get the cache directory
+CACHE_DIR=${2:?}
+# Get the env directory
+ENV_DIR=${3:?}
+
+# Create necessary directories
+mkdir -p "${BUILD_DIR}/bin"
+
+# Copy the binaries to the build directory
+cp -r "${CNB_BUILDPACK_DIR}/binaries-${CNB_STACK_ID}/"* "${BUILD_DIR}/bin/"
+
+# Make the binaries executable
+chmod +x "${BUILD_DIR}/bin/"*
+
+# Set up the environment
+cat > "${BUILD_DIR}/.profile.d/pdftk.sh" << EOL
+export PATH="\$PATH:\$HOME/bin"
+export LD_LIBRARY_PATH="\$LD_LIBRARY_PATH:\$HOME/bin"
+EOL 

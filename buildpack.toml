@@ -1,0 +1,20 @@
+api = "0.8"
+
+[buildpack]
+id = "io.build.github.mrch4n.cnb-pdftk"
+version = "0.0.1"
+name = "PDFTK CNB Buildpack"
+description = "A Cloud Native Buildpack for PDFTK"
+
+[[stacks]]
+id = "heroku-22"
+build-images = ["heroku/buildpacks:22"]
+run-images = ["heroku/pack:22"]
+
+[[stacks]]
+id = "heroku-20"
+build-images = ["heroku/buildpacks:20"]
+run-images = ["heroku/pack:20"]
+
+[metadata]
+include-files = ["bin/detect", "bin/build", "bin/generate", "buildpacks/pdftk/bin/compile", "buildpacks/pdftk/bin/release"] 

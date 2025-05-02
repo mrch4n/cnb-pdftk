@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+cat << EOL
+[[processes]]
+type = "web"
+command = "pdftk --version"
+EOL 
